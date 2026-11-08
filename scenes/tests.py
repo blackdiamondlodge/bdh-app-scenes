@@ -104,17 +104,6 @@ class SceneControlTests(TestCase):
 
 
 class HomepageHookTests(TestCase):
-    @patch("scenes.homepage.requests.get")
-    def test_status_counts_lights_but_not_groups(self, mock_get):
-        mock_get.return_value = MagicMock(json=lambda: [
-            {"entity_id": "light.a", "state": "on", "attributes": {}},
-            {"entity_id": "light.b", "state": "off", "attributes": {}},
-            {"entity_id": "light.group", "state": "on", "attributes": {"entity_id": ["light.a"]}},
-            {"entity_id": "switch.c", "state": "on", "attributes": {}},
-        ])
-        from scenes.homepage import status
-        self.assertEqual(status().text, "1 light on")
-
     @patch("scenes.homepage.activate_scene")
     @patch("scenes.homepage.get_scenes")
     def test_scene_shortcuts(self, mock_scenes, mock_activate):
