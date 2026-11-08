@@ -4,7 +4,6 @@ spec = PluginSpec(
     id="scenes",
     app="scenes",
     urls="scenes.urls",
-    status="scenes.homepage.status",
     shortcuts="scenes.homepage.shortcuts",
     run_shortcut="scenes.homepage.run_shortcut",
     tiles=(

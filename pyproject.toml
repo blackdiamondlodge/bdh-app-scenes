@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "bdh-app-scenes"
-version = "1.0.0"
+version = "1.0.1"
 description = "Black Diamond Hub app: activate Home Assistant scenes from the hub"
 readme = "README.md"
 license = { text = "MIT" }

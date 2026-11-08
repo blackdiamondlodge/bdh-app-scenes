@@ -1,30 +1,8 @@
-from urllib.parse import urljoin
+from bdh_sdk import ALL_MODES, Shortcut
 
-import requests
-from django.conf import settings
-
-from bdh_sdk import ALL_MODES, INFO, ON, Shortcut, Status
-
-from .views import HEADERS, activate_scene, get_scenes
+from .views import activate_scene, get_scenes
 
 SCENE_PREFIX = "scene."
-
-
-def status():
-    url = urljoin(settings.HOMEASSISTANT_URL, "/api/states")
-    response = requests.get(url, headers=HEADERS, timeout=10)
-    response.raise_for_status()
-    # Light groups list their members in an entity_id attribute; skip them
-    # so each bulb is counted once.
-    on = sum(
-        1 for s in response.json()
-        if s["entity_id"].startswith("light.")
-        and s.get("state") == "on"
-        and "entity_id" not in s.get("attributes", {})
-    )
-    if on == 0:
-        return Status("All lights off", INFO)
-    return Status(f"{on} light{'s' if on != 1 else ''} on", ON)
 
 
 def shortcuts():
