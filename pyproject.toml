@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bdh-app-scenes"
+version = "1.0.0"
+description = "Black Diamond Hub app: activate Home Assistant scenes from the hub"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+dependencies = [
+    "bdh-sdk[ha]>=0.2,<1",
+    "requests",
+]
+
+[project.urls]
+Source = "https://github.com/blackdiamondlodge/bdh-app-scenes"
+
+[project.entry-points."blackdiamondhub.plugins"]
+scenes = "scenes.plugin:spec"
+
+[tool.setuptools.packages.find]
+include = ["scenes", "scenes.*"]
+
+[tool.setuptools.package-data]
+scenes = [
+    "templates/**/*",
+    "static/**/*",
+    "migrations/*.py",
+]
